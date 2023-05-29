@@ -1,5 +1,5 @@
 export interface IUpdateStockRequest {
-  id: string;
+  id: number;
   name: string;
   quantity: number;
   price: number;
@@ -9,7 +9,7 @@ export interface IUpdateStockRequest {
 }
 
 export class UpdateStockRequest implements IUpdateStockRequest {
-  id!: string;
+  id!: number;
   name!: string;
   quantity!: number;
   price!: number;

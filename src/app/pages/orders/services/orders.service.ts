@@ -17,13 +17,13 @@ const httpOptions = {
     providedIn: 'root',
 })
 export class OrderService {
-    url = '';
+    url = 'http://localhost/apiYivali/index.php/Orders/';
     constructor(private http: HttpClient) {
     }
 
     getOrders() {
       return new Promise<ResponseModel<OrderModel>>((resolve, reject) => {
-        this.http.post(`Pacientes/crearMascota`, httpOptions).subscribe({
+        this.http.get(`consultarListaOrders`, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)
@@ -38,7 +38,7 @@ export class OrderService {
 
     getOrder(request: GetItemRequest) {
       return new Promise<ResponseModel<OrderModel>>((resolve, reject) => {
-        this.http.get(`Pacientes/crearMascota/${request.id}`, httpOptions).subscribe({
+        this.http.get(`consultarOrden/${request.id}`, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)
@@ -53,7 +53,7 @@ export class OrderService {
 
     createOrder(request: CreateOrderRequest) {
       return new Promise<OrderModel>((resolve, reject) => {
-        this.http.post(`Pacientes/crearMascota`, request, httpOptions).subscribe({
+        this.http.post(`crearOrder`, request, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)
@@ -68,7 +68,7 @@ export class OrderService {
 
     updateOrder(request: UpdateOrderRequest) {
       return new Promise<OrderModel>((resolve, reject) => {
-        this.http.post(`Pacientes/crearMascota`, request, httpOptions).subscribe({
+        this.http.post(`aztualizarOrden`, request, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)
@@ -83,7 +83,7 @@ export class OrderService {
 
     deleteOrder(request: any) {
       return new Promise<OrderModel>((resolve, reject) => {
-        this.http.post(`Pacientes/crearMascota`, request, httpOptions).subscribe({
+        this.http.get(`eliminarOrden/${request.id}`, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)

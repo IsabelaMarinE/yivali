@@ -8,7 +8,7 @@ export interface IStockModel {
 }
 
 export class StockModel implements IStockModel {
-  id!: string;
+  id!: number;
   name!: string;
   quantity!: number;
   price!: number;

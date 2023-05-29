@@ -17,13 +17,13 @@ const httpOptions = {
     providedIn: 'root',
 })
 export class SourceService {
-    url = '';
+    url = 'http://localhost/apiYivali/index.php/Products/';
     constructor(private http: HttpClient) {
     }
 
-    getSources() {
+    getSources(request: GetItemRequest) {
       return new Promise<ResponseModel<SourceModel>>((resolve, reject) => {
-        this.http.post(`Pacientes/crearMascota`, httpOptions).subscribe({
+        this.http.get(`consultarListaSources/${request.id}`, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)
@@ -38,7 +38,7 @@ export class SourceService {
 
     getSource(request: GetItemRequest) {
       return new Promise<ResponseModel<SourceModel>>((resolve, reject) => {
-        this.http.get(`Pacientes/crearMascota/${request.id}`, httpOptions).subscribe({
+        this.http.get(`consultarSource/${request.id}`, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)
@@ -53,7 +53,7 @@ export class SourceService {
 
     createSource(request: CreateSourceRequest) {
       return new Promise<SourceModel>((resolve, reject) => {
-        this.http.post(`Pacientes/crearMascota`, request, httpOptions).subscribe({
+        this.http.post(`crearSource`, request, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)
@@ -68,7 +68,7 @@ export class SourceService {
 
     updateSource(request: UpdateSourceRequest) {
       return new Promise<SourceModel>((resolve, reject) => {
-        this.http.post(`Pacientes/crearMascota`, request, httpOptions).subscribe({
+        this.http.post(`aztualizarSources`, request, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)
@@ -83,7 +83,7 @@ export class SourceService {
 
     deleteSource(request: any) {
       return new Promise<SourceModel>((resolve, reject) => {
-        this.http.post(`Pacientes/crearMascota`, request, httpOptions).subscribe({
+        this.http.get(`eliminarSource/${request.id}`, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)

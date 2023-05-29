@@ -17,13 +17,13 @@ const httpOptions = {
     providedIn: 'root',
 })
 export class ClientService {
-    url = '';
+    url = 'http://localhost/apiYivali/index.php/Clients/';
     constructor(private http: HttpClient) {
     }
 
     getClients() {
       return new Promise<ResponseModel<ClientModel>>((resolve, reject) => {
-        this.http.post(`Pacientes/crearMascota`, httpOptions).subscribe({
+        this.http.get(`consultarListaClientes`, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)
@@ -38,7 +38,7 @@ export class ClientService {
 
     getClient(request: GetItemRequest) {
       return new Promise<ResponseModel<ClientModel>>((resolve, reject) => {
-        this.http.get(`Pacientes/crearMascota/${request.id}`, httpOptions).subscribe({
+        this.http.get(`consultarCliente/${request.id}`, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)
@@ -53,7 +53,7 @@ export class ClientService {
 
     createClient(request: CreateClientRequest) {
       return new Promise<ClientModel>((resolve, reject) => {
-        this.http.post(`Pacientes/crearMascota`, request, httpOptions).subscribe({
+        this.http.post(`crearCliente`, request, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)
@@ -68,7 +68,7 @@ export class ClientService {
 
     updateClient(request: UpdateClientRequest) {
       return new Promise<ClientModel>((resolve, reject) => {
-        this.http.post(`Pacientes/crearMascota`, request, httpOptions).subscribe({
+        this.http.post(`aztualizarCliente`, request, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)
@@ -83,7 +83,7 @@ export class ClientService {
 
     deleteClient(request: any) {
       return new Promise<ClientModel>((resolve, reject) => {
-        this.http.post(`Pacientes/crearMascota`, request, httpOptions).subscribe({
+        this.http.post(`eliminarCliente/${request.id}`, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)

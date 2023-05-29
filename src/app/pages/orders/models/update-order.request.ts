@@ -1,5 +1,5 @@
 export interface IUpdateOrderRequest {
-  id: string;
+  id: number;
   clientId: number;
   orderDescription: string;
   transporter: string;
@@ -9,7 +9,7 @@ export interface IUpdateOrderRequest {
 }
 
 export class UpdateOrderRequest implements IUpdateOrderRequest {
-  id!: string;
+  id!: number;
   clientId!: number;
   orderDescription!: string;
   transporter!: string;

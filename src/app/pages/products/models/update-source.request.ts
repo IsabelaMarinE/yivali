@@ -1,11 +1,11 @@
 export interface IUpdateSourceRequest {
-  id: string;
+  id: number;
   name: string;
   quantity: number;
 }
 
 export class UpdateSourceRequest implements IUpdateSourceRequest {
-  id!: string;
+  id!: number;
   name!: string;
   quantity!: number;
 }

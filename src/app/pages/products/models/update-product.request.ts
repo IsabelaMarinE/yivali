@@ -1,5 +1,5 @@
 export interface IUpdateProductRequest {
-  id: string;
+  id: number;
   name: string;
   salesValue: number;
   img: any;
@@ -7,7 +7,7 @@ export interface IUpdateProductRequest {
 }
 
 export class UpdateProductRequest implements IUpdateProductRequest {
-  id!: string;
+  id!: number;
   name!: string;
   salesValue!: number;
   img!: any;

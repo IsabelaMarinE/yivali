@@ -10,8 +10,8 @@ export class SourceEffects {
     loadSources$ = createEffect(() =>
         this.actions$.pipe(
             ofType(SourceActions.loadSources),
-            switchMap(() =>
-                from(this.SourceService.getSources()).pipe(
+            switchMap((action) =>
+                from(this.SourceService.getSources(action.request)).pipe(
                     map((response) => {
                         return SourceActions.loadSourcesSuccess({ response });
                     }),

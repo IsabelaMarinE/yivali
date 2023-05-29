@@ -10,7 +10,8 @@ export const clearStoreFlags = createAction('[Source] Clear Store Flags');
 export const clearSources = createAction('[Source] Clear Sources');
 
 export const loadSources = createAction(
-    '[Source] Load Sources'
+    '[Source] Load Sources',
+    props<{ request: GetItemRequest }>()
 );
 
 export const loadSourcesSuccess = createAction(

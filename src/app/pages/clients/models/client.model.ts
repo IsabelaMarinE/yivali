@@ -10,7 +10,7 @@ export interface IClientModel {
 }
 
 export class ClientModel implements IClientModel {
-  id!: string;
+  id!: number;
   name!: string;
   lastName!: string;
   telephone!: string;

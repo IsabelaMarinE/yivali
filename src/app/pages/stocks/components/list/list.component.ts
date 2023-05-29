@@ -58,11 +58,11 @@ export class ListComponent {
       })
   }
 
-  public editStock(id:string){
+  public editStock(id:number){
     this.router.navigate(['/update', { id: id }]);
   }
 
-  public deleteStock(id:string){
+  public deleteStock(id:number){
     if(id){
       Swal.fire({
         title: 'Estas seguro que quieres eliminar este producto del Stock?',

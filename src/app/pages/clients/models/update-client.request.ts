@@ -1,5 +1,5 @@
 export interface IUpdateClientRequest {
-  userId: string;
+  id: number;
   name: string;
   lastName: string;
   telephone: string;
@@ -12,8 +12,7 @@ export interface IUpdateClientRequest {
 }
 
 export class UpdateClientRequest implements IUpdateClientRequest {
-  id!: string;
-  userId!: string;
+  id!: number;
   name!: string;
   lastName!: string;
   telephone!: string;

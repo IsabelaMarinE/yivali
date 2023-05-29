@@ -1,4 +1,5 @@
 export interface IOrderModel {
+  id: number;
   clientId: number;
   orderDescription: string;
   transporter: string;
