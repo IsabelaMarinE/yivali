@@ -11,7 +11,6 @@ import { ClientEffects } from './store/effects/clients.effects';
 import { clientFetureKey } from './store/reducers/clients.reducer';
 import { clientStoreReducer } from './store/reducers/clients-store.reducer';
 
-
 @NgModule({
   declarations: [
     CreateComponent,
@@ -24,7 +23,7 @@ import { clientStoreReducer } from './store/reducers/clients-store.reducer';
     ReactiveFormsModule,
     ClientsRoutingModule,
     StoreModule.forFeature(clientFetureKey, clientStoreReducer),
-    EffectsModule.forRoot([ClientEffects])
+    EffectsModule.forFeature(ClientEffects)
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

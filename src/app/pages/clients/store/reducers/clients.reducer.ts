@@ -23,7 +23,7 @@ export const initialClientState: ClientState = {
     errors: undefined
 };
 
-export const patientReducer = createReducer(
+export const clientReducer = createReducer(
     initialClientState,
     on(ClientActions.clearStoreFlags, (state: ClientState) => ({
         ...state,
@@ -106,10 +106,10 @@ export const patientReducer = createReducer(
     }))
 );
 
-export function patientReducerFunc(
+export function clientReducerFunc(
     state: ClientState | undefined,
     action: Action
 ): any {
-    return patientReducerFunc(state, action);
+    return clientReducerFunc(state, action);
 }
 

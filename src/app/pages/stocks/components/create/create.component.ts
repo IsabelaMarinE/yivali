@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'create-clients',
+  selector: 'create-stock',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css']
 })

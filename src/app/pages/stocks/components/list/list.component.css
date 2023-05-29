@@ -1,0 +1,16 @@
+table {
+  overflow: auto;
+  max-height: 50vh;
+}
+
+span:hover{
+  cursor: pointer;
+}
+
+svg:hover {
+  fill: red;
+}
+
+span:first-of-type {
+  margin-right: 10px;
+}
