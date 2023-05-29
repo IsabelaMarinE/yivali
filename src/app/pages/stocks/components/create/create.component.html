@@ -1,23 +1,23 @@
-<form class="row g-3 needs-validation" novalidate>
+<form class="row g-3 needs-validation" #FormNewStock="ngForm" (ngSubmit)="createNewStock(FormNewStock)" novalidate>
   <div class="col-md-12">
     <label for="name" class="form-label">Nombre Producto</label>
-    <input type="text" class="form-control" id="name" required>
+    <input type="text" class="form-control" id="name" [(ngModel)]="stock.name" #name="ngModel" name="name" required>
   </div>
   <div class="col-md-4">
     <label for="quantity" class="form-label">Cantidad</label>
-    <input type="number" class="form-control" id="quantity" required>
+    <input type="number" class="form-control" id="quantity" [(ngModel)]="stock.quantity" #quantity="ngModel" name="quantity" required>
   </div>
   <div class="col-md-4">
     <label for="price" class="form-label">Precio</label>
-    <input type="number" class="form-control" id="price" required>
+    <input type="number" class="form-control" id="price" [(ngModel)]="stock.price" #price="ngModel" name="price" required>
   </div>
   <div class="col-md-4">
     <label for="buyDate" class="form-label">Fecha de Compra</label>
-    <input type="date" class="form-control" id="buyDate" required>
+    <input type="date" class="form-control" id="buyDate" [(ngModel)]="stock.buyDate" #buyDate="ngModel" name="buyDate" required>
   </div>
   <div class="col-md-6">
     <label for="invoiceImg" class="form-label">Imagen Factura</label>
-    <input type="file" class="form-control" id="invoiceImg">
+    <input type="file" class="form-control" id="invoiceImg" [(ngModel)]="stock.invoiceImg" #invoiceImg="ngModel" name="invoiceImg">
   </div>
   <div class="col-12">
     <button class="btn btn-primary" type="submit">Agregar</button>

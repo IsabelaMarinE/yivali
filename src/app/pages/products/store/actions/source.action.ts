@@ -2,8 +2,8 @@ import { createAction, props } from '@ngrx/store';
 import { CreateSourceRequest } from '../../models/create-source.request';
 import { SourceModel } from '../../models/source.model';
 import { UpdateSourceRequest } from '../../models/update-source.request';
-import { GetItemRequest } from 'src/app/components/models/get-itme.request';
 import { ResponseModel } from 'src/app/components/models/response.model';
+import { GetItemRequest } from 'src/app/components/models/get-itme.request';
 
 export const clearStoreFlags = createAction('[Source] Clear Store Flags');
 

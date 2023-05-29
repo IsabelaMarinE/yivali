@@ -9,17 +9,17 @@ const routes: Routes = [
         path: '',
         component: StocksComponent,
         children: [
-            {
-                path: 'list',
-                component: ListComponent,
-            },
-            {
-                path: 'create/:id',
-                component: CreateComponent
-            },
-            {
-              path: 'create',
+          {
+              path: 'list',
+              component: ListComponent,
+          },
+          {
+              path: 'update/:id',
               component: CreateComponent
+          },
+          {
+            path: 'create',
+            component: CreateComponent
           },
         ],
     },
