@@ -48,7 +48,7 @@ export class ListClientComponent implements OnInit {
       .select(ClientsSelector.selectDeleteClientResponse)
       .pipe(takeUntil(this.ngDestroyed$))
       .subscribe((response) => {
-        if(response){
+        if(response && response.state){
           Swal.fire({
             icon: 'success',
             title: 'Cliente Eliminado',
@@ -59,7 +59,7 @@ export class ListClientComponent implements OnInit {
   }
 
   public editClient(id:number){
-    this.router.navigate(['/updateClient', { id: id }]);
+    this.router.navigate([`/updateClient/${id}`]);
   }
 
   public deleteClient(id:number){
@@ -67,9 +67,7 @@ export class ListClientComponent implements OnInit {
       Swal.fire({
         title: 'Estas seguro que quieres eliminar el Cliente?',
         showDenyButton: true,
-        showCancelButton: true,
         confirmButtonText: 'Aceptar',
-        denyButtonText: `Cancelar`,
       }).then((result) => {
         if (result.isConfirmed) {
           this.clientStore.dispatch(ClientActions.deleteClient({request: id}));

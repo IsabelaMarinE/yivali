@@ -75,6 +75,7 @@ export class ClientEffects {
         this.actions$.pipe(
             ofType(ClientActions.deleteClient),
             switchMap((action) =>
+
                 from(this.ClientService.deleteClient(action.request)).pipe(
                     map((response) => {
                         return ClientActions.deleteClientSuccess({ response })

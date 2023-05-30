@@ -7,7 +7,7 @@ export const clientFetureKey = 'client';
 
 export interface ClientState {
     ClientsResponse: ResponseModel<ClientModel> | undefined;
-    Client: ClientModel | undefined;
+    Client: ResponseModel<ClientModel> | undefined;
     createClientResponse: ClientModel | undefined;
     updateClientResponse: ClientModel | undefined;
     deleteClientResponse: any | undefined;
@@ -56,7 +56,7 @@ export const clientReducer = createReducer(
     })),
     on(ClientActions.loadClientSuccess, (state: ClientState, { response }) => ({
         ...state,
-        Client: response.items[0]
+        Client: response
     })),
     on(ClientActions.loadClientFail, (state: ClientState) => ({
         ...state,

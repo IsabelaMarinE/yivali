@@ -27,7 +27,7 @@ export class ClientService {
     }
 
     getClient(request: GetItemRequest): Observable<ResponseModel<ClientModel>> {
-        return this.http.get<ResponseModel<ClientModel>>(`${this.url}consultarCliente/${request.id}`, httpOptions)
+        return this.http.get<ResponseModel<ClientModel>>(`${this.url}consultarCliente/${Number(request.id)}`, httpOptions)
     }
 
     createClient(request: CreateClientRequest): Observable<ClientModel> {
@@ -38,7 +38,7 @@ export class ClientService {
       return this.http.post<ClientModel>(`${this.url}aztualizarCliente`, request, httpOptions)
     }
 
-    deleteClient(request: any): Observable<ClientModel> {
-      return this.http.post<ClientModel>(`${this.url}eliminarCliente/${request.id}`, httpOptions)
+    deleteClient(request: any): Observable<any> {
+      return this.http.get<any>(`${this.url}eliminarCliente/${Number(request.id)}`, httpOptions)
     }
 }

@@ -10,6 +10,8 @@ import { GetItemRequest } from 'src/app/components/models/get-itme.request';
 import { ClientsStoreState } from '../../store/reducers/clients-store.reducer';
 import * as ClientActions from '../../store/actions/clients.action';
 import * as ClientSelector from '../../store/selectors/client.selectors';
+import { ClientModel } from '../../models/client.model';
+import { UpdateClientRequest } from '../../models/update-client.request';
 
 @Component({
   selector: 'create-clients',
@@ -18,12 +20,12 @@ import * as ClientSelector from '../../store/selectors/client.selectors';
 })
 export class CreateClientComponent implements OnInit {
   public ngDestroyed$ = new Subject();
-  public client = new CreateClientRequest();
+  public client = new ClientModel();
   public itemRequest = new GetItemRequest();
 
   constructor(
     private stockStore: Store<ClientsStoreState>,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   public ngOnDestroy() {
@@ -60,8 +62,8 @@ export class CreateClientComponent implements OnInit {
       .select(ClientSelector.selectClient)
       .pipe(takeUntil(this.ngDestroyed$))
       .subscribe((response) => {
-        if(response){
-          this.client = response;
+        if(response && response.state){
+          this.client = _.cloneDeep(response.items[0]);
         }
       })
 
@@ -79,12 +81,20 @@ export class CreateClientComponent implements OnInit {
       })
   }
 
-  createNewClient(form:NgForm){
+  onSubmite(form:NgForm){
     if(form.valid){
-      this.client.gender = form.value.gender;
-      var request = new CreateClientRequest();
-      request = _.merge(request, this.client);
-      this.stockStore.dispatch(ClientActions.createClient({request}));
+      let request;
+      if(this.itemRequest.id === undefined){
+        this.client.gender = form.value.gender;
+        request = new CreateClientRequest();
+        request = _.merge(request, this.client);
+        this.stockStore.dispatch(ClientActions.createClient({request}));
+      } else {
+        this.client.gender = form.value.gender;
+        request = new UpdateClientRequest();
+        request = _.merge(request, this.client);
+        this.stockStore.dispatch(ClientActions.updateClient({request}));
+        }
     }else{
       Swal.fire({
         icon: 'info',
