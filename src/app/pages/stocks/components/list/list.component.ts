@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
 import * as _ from 'lodash';
@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent {
+export class ListComponent implements OnInit {
 
   public ngDestroyed$ = new Subject();
   public stocks!: Array<StockModel>;

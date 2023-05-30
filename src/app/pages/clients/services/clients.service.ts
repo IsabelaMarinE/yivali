@@ -6,6 +6,7 @@ import { ClientModel } from '../models/client.model';
 import { GetItemRequest } from 'src/app/components/models/get-itme.request';
 import { UpdateClientRequest } from '../models/update-client.request';
 import { ResponseModel } from 'src/app/components/models/response.model';
+import { Observable } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -21,78 +22,23 @@ export class ClientService {
     constructor(private http: HttpClient) {
     }
 
-    getClients() {
-      return new Promise<ResponseModel<ClientModel>>((resolve, reject) => {
-        this.http.get(`consultarListaClientes`, httpOptions).subscribe({
-          next: (res: any) =>{
-            if(res.status){
-              resolve(res.items)
-            }
-          },
-          error: (err: any) =>{
-            reject(err)
-          }
-        })
-      })
+    getClients(): Observable<ResponseModel<ClientModel>> {
+      return this.http.get<ResponseModel<ClientModel>>(`${this.url}consultarListaClientes`, httpOptions);
     }
 
-    getClient(request: GetItemRequest) {
-      return new Promise<ResponseModel<ClientModel>>((resolve, reject) => {
-        this.http.get(`consultarCliente/${request.id}`, httpOptions).subscribe({
-          next: (res: any) =>{
-            if(res.status){
-              resolve(res.items)
-            }
-          },
-          error: (err: any) =>{
-            reject(err)
-          }
-        })
-      })
+    getClient(request: GetItemRequest): Observable<ResponseModel<ClientModel>> {
+        return this.http.get<ResponseModel<ClientModel>>(`${this.url}consultarCliente/${request.id}`, httpOptions)
     }
 
-    createClient(request: CreateClientRequest) {
-      return new Promise<ClientModel>((resolve, reject) => {
-        this.http.post(`crearCliente`, request, httpOptions).subscribe({
-          next: (res: any) =>{
-            if(res.status){
-              resolve(res.items)
-            }
-          },
-          error: (err: any) =>{
-            reject(err)
-          }
-        })
-      })
+    createClient(request: CreateClientRequest): Observable<ClientModel> {
+      return this.http.post<ClientModel>(`${this.url}crearCliente`, request, httpOptions);
     }
 
-    updateClient(request: UpdateClientRequest) {
-      return new Promise<ClientModel>((resolve, reject) => {
-        this.http.post(`aztualizarCliente`, request, httpOptions).subscribe({
-          next: (res: any) =>{
-            if(res.status){
-              resolve(res.items)
-            }
-          },
-          error: (err: any) =>{
-            reject(err)
-          }
-        })
-      })
+    updateClient(request: UpdateClientRequest): Observable<ClientModel> {
+      return this.http.post<ClientModel>(`${this.url}aztualizarCliente`, request, httpOptions)
     }
 
-    deleteClient(request: any) {
-      return new Promise<ClientModel>((resolve, reject) => {
-        this.http.post(`eliminarCliente/${request.id}`, httpOptions).subscribe({
-          next: (res: any) =>{
-            if(res.status){
-              resolve(res.items)
-            }
-          },
-          error: (err: any) =>{
-            reject(err)
-          }
-        })
-      })
+    deleteClient(request: any): Observable<ClientModel> {
+      return this.http.post<ClientModel>(`${this.url}eliminarCliente/${request.id}`, httpOptions)
     }
 }

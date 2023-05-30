@@ -6,6 +6,7 @@ import { SourceModel } from '../models/source.model';
 import { GetItemRequest } from 'src/app/components/models/get-itme.request';
 import { UpdateSourceRequest } from '../models/update-source.request';
 import { ResponseModel } from 'src/app/components/models/response.model';
+import { Observable } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -21,78 +22,23 @@ export class SourceService {
     constructor(private http: HttpClient) {
     }
 
-    getSources(request: GetItemRequest) {
-      return new Promise<ResponseModel<SourceModel>>((resolve, reject) => {
-        this.http.get(`consultarListaSources/${request.id}`, httpOptions).subscribe({
-          next: (res: any) =>{
-            if(res.status){
-              resolve(res.items)
-            }
-          },
-          error: (err: any) =>{
-            reject(err)
-          }
-        })
-      })
+    getSources(request: GetItemRequest): Observable<ResponseModel<SourceModel>> {
+      return this.http.get<ResponseModel<SourceModel>>(`${this.url}consultarListaSources/${request.id}`, httpOptions)
     }
 
-    getSource(request: GetItemRequest) {
-      return new Promise<ResponseModel<SourceModel>>((resolve, reject) => {
-        this.http.get(`consultarSource/${request.id}`, httpOptions).subscribe({
-          next: (res: any) =>{
-            if(res.status){
-              resolve(res.items)
-            }
-          },
-          error: (err: any) =>{
-            reject(err)
-          }
-        })
-      })
+    getSource(request: GetItemRequest): Observable<ResponseModel<SourceModel>> {
+      return this.http.get<ResponseModel<SourceModel>>(`${this.url}consultarSource/${request.id}`, httpOptions)
     }
 
-    createSource(request: CreateSourceRequest) {
-      return new Promise<SourceModel>((resolve, reject) => {
-        this.http.post(`crearSource`, request, httpOptions).subscribe({
-          next: (res: any) =>{
-            if(res.status){
-              resolve(res.items)
-            }
-          },
-          error: (err: any) =>{
-            reject(err)
-          }
-        })
-      })
+    createSource(request: CreateSourceRequest): Observable<SourceModel> {
+      return this.http.post<SourceModel>(`${this.url}crearSource`, request, httpOptions)
     }
 
-    updateSource(request: UpdateSourceRequest) {
-      return new Promise<SourceModel>((resolve, reject) => {
-        this.http.post(`aztualizarSources`, request, httpOptions).subscribe({
-          next: (res: any) =>{
-            if(res.status){
-              resolve(res.items)
-            }
-          },
-          error: (err: any) =>{
-            reject(err)
-          }
-        })
-      })
+    updateSource(request: UpdateSourceRequest): Observable<SourceModel> {
+      return this.http.post<SourceModel>(`${this.url}aztualizarSources`, request, httpOptions)
     }
 
-    deleteSource(request: any) {
-      return new Promise<SourceModel>((resolve, reject) => {
-        this.http.get(`eliminarSource/${request.id}`, httpOptions).subscribe({
-          next: (res: any) =>{
-            if(res.status){
-              resolve(res.items)
-            }
-          },
-          error: (err: any) =>{
-            reject(err)
-          }
-        })
-      })
+    deleteSource(request: any): Observable<SourceModel> {
+      return this.http.get<SourceModel>(`${this.url}eliminarSource/${request.id}`, httpOptions)
     }
 }

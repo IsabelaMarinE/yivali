@@ -23,7 +23,7 @@ export class ProductService {
 
     getProducts() {
       return new Promise<ResponseModel<ProductModel>>((resolve, reject) => {
-        this.http.get(`consultarListaProducts`, httpOptions).subscribe({
+        this.http.get(`${this.url}consultarListaProducts`, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)
@@ -38,7 +38,7 @@ export class ProductService {
 
     getProduct(request: GetItemRequest) {
       return new Promise<ResponseModel<ProductModel>>((resolve, reject) => {
-        this.http.get(`consultarProduct/${request.id}`, httpOptions).subscribe({
+        this.http.get(`${this.url}consultarProduct/${request.id}`, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)
@@ -53,7 +53,7 @@ export class ProductService {
 
     createProduct(request: CreateProductRequest) {
       return new Promise<ProductModel>((resolve, reject) => {
-        this.http.post(`crearProduct`, request, httpOptions).subscribe({
+        this.http.post(`${this.url}crearProduct`, request, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)
@@ -68,7 +68,7 @@ export class ProductService {
 
     updateProduct(request: UpdateProductRequest) {
       return new Promise<ProductModel>((resolve, reject) => {
-        this.http.post(`aztualizarProduct`, request, httpOptions).subscribe({
+        this.http.post(`${this.url}aztualizarProduct`, request, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)
@@ -83,7 +83,7 @@ export class ProductService {
 
     deleteProduct(request: any) {
       return new Promise<ProductModel>((resolve, reject) => {
-        this.http.get(`eliminarProduct/${request.id}`, httpOptions).subscribe({
+        this.http.get(`${this.url}eliminarProduct/${request.id}`, httpOptions).subscribe({
           next: (res: any) =>{
             if(res.status){
               resolve(res.items)

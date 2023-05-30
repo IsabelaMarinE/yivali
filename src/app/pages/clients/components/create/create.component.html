@@ -1,1 +1,44 @@
-<p>create works!</p>
+<form class="row g-3 needs-validation" #FormNewClient="ngForm" (ngSubmit)="createNewClient(FormNewClient)" novalidate>
+  <div class="col-md-6">
+    <label for="name" class="form-label">Nombre</label>
+    <input type="text" class="form-control" id="name" [(ngModel)]="client.name" #name="ngModel" name="name" required>
+  </div>
+  <div class="col-md-6">
+    <label for="lastName" class="form-label">Apellido</label>
+    <input type="text" class="form-control" id="lastName" [(ngModel)]="client.lastName" #lastName="ngModel" name="lastName" required>
+  </div>
+  <div class="col-md-4">
+    <label for="telephone" class="form-label">Telefono</label>
+    <input type="text" class="form-control" id="telephone" [(ngModel)]="client.telephone" #telephone="ngModel" name="telephone" required>
+  </div>
+  <div class="col-md-4">
+    <label for="adress" class="form-label">Direccion</label>
+    <input type="text" class="form-control" id="adress" [(ngModel)]="client.adress" #adress="ngModel" name="adress" required>
+  </div>
+  <div class="col-md-4">
+    <label for="email" class="form-label">Correo</label>
+    <input type="email" class="form-control" id="email" [(ngModel)]="client.email" #email="ngModel" name="email" required>
+  </div>
+  <div class="col-md-6">
+    <label for="city" class="form-label">Ciudad</label>
+    <input type="text" class="form-control" id="city" [(ngModel)]="client.city" #city="ngModel" name="city">
+  </div>
+  <div class="col-md-6">
+    <label for="gender" class="form-label">Genero</label>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="gender" ngModel value="male"  id="male">
+      <label class="form-check-label" for="male">
+        Hombre
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="gender" ngModel value="female" id="female">
+      <label class="form-check-label" for="female">
+        Mujer
+      </label>
+    </div>
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit">Agregar</button>
+  </div>
+</form>
