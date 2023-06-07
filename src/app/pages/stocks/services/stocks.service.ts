@@ -18,17 +18,16 @@ const httpOptions = {
     providedIn: 'root',
 })
 export class StockService {
-    url = 'http://localhost/apiYivali/index.php/Stock';
+    url = 'http://localhost/apiYivali/index.php/Stock/';
     constructor(private http: HttpClient) {
     }
 
     getStocks(): Observable<ResponseModel<StockModel>> {
       return this.http.get<ResponseModel<StockModel>>(`${this.url}consultarListaStocks`, httpOptions)
-
     }
 
     getStock(request: GetItemRequest): Observable<ResponseModel<StockModel>> {
-      return this.http.get<ResponseModel<StockModel>>(`${this.url}consultarStock/${request.id}`, httpOptions)
+      return this.http.get<ResponseModel<StockModel>>(`${this.url}consultarStock/${Number(request.id)}`, httpOptions)
     }
 
     createStock(request: CreateStockRequest): Observable<StockModel> {
@@ -39,7 +38,7 @@ export class StockService {
       return this.http.post<StockModel>(`${this.url}aztualizarStock`, request, httpOptions)
     }
 
-    deleteStock(request: any): Observable<StockModel> {
-      return this.http.get<StockModel>(`${this.url}eliminarStock/${request.id}`, httpOptions)
+    deleteStock(request: any): Observable<ResponseModel<StockModel>> {
+      return this.http.get<ResponseModel<StockModel>>(`${this.url}eliminarStock/${Number(request)}`, httpOptions)
     }
 }

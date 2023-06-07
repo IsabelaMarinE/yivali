@@ -1,3 +1,5 @@
+import { SourceModel } from "./source.model";
+
 export interface IProductModel {
   name: string;
   price: number;
@@ -5,6 +7,7 @@ export interface IProductModel {
   salesValue: number;
   img: any;
   typeImg: string;
+  sourceList: Array<SourceModel>;
 }
 
 export class ProductModel implements IProductModel {
@@ -15,4 +18,5 @@ export class ProductModel implements IProductModel {
   salesValue!: number;
   img!: any;
   typeImg!: string;
+  sourceList!: Array<SourceModel>;
 }

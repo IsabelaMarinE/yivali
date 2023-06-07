@@ -7,19 +7,21 @@ import * as _ from 'lodash';
 import { StockStoreState } from '../../store/reducers/stock-store.reducer';
 import * as StockActions from '../../store/actions/stock.action'
 import * as StocksSelector from '../../store/selectors/stock.selectors';
-import { Observable, ReplaySubject, Subject, switchMap, takeUntil } from 'rxjs';
+import { Observable, ReplaySubject, Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { GetItemRequest } from 'src/app/components/models/get-itme.request';
+import { StockModel } from '../../models/stock.model';
+import { UpdateStockRequest } from '../../models/update-stock.request';
 
 @Component({
   selector: 'create-stock',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css']
 })
-export class CreateComponent implements OnInit {
+export class CreateStockComponent implements OnInit {
 
   public ngDestroyed$ = new Subject();
-  public stock = new CreateStockRequest();
+  public stock = new StockModel();
   public itemRequest = new GetItemRequest();
 
   constructor(
@@ -35,8 +37,10 @@ export class CreateComponent implements OnInit {
 
   public ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap)=>{
-      this.itemRequest.id = params.get('id')!;
-      this.stockStore.dispatch(StockActions.loadStock({request: this.itemRequest}))
+      if(params.get('id') !== null){
+        this.itemRequest.id = params.get('id')!;
+        this.stockStore.dispatch(StockActions.loadStock({request: this.itemRequest}))
+      }
     });
     this.storeSubscription();
   }
@@ -59,8 +63,8 @@ export class CreateComponent implements OnInit {
       .select(StocksSelector.selectStock)
       .pipe(takeUntil(this.ngDestroyed$))
       .subscribe((response) => {
-        if(response){
-          this.stock = response;
+        if(response && response.state){
+          this.stock = _.cloneDeep(response.items[0]);
         }
       })
 
@@ -78,11 +82,18 @@ export class CreateComponent implements OnInit {
       })
   }
 
-  createNewStock(form:NgForm){
+  onSubmite(form:NgForm){
     if(form.valid){
-      var request = new CreateStockRequest();
-      request = _.merge(request, this.stock);
-      this.stockStore.dispatch(StockActions.createStock({request}));
+      let request;
+      if(this.itemRequest.id === undefined){
+        request = new CreateStockRequest();
+        request = _.merge(request, this.stock);
+        this.stockStore.dispatch(StockActions.createStock({request}));
+      }else {
+        request = new UpdateStockRequest();
+        request = _.merge(request, this.stock);
+        this.stockStore.dispatch(StockActions.updateStock({request}));
+      }
     }else{
       Swal.fire({
         icon: 'info',

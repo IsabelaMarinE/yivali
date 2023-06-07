@@ -7,7 +7,7 @@ export const ProductFetureKey = 'Product';
 
 export interface ProductState {
     ProductsResponse: ResponseModel<ProductModel> | undefined;
-    Product: ProductModel | undefined;
+    Product: ResponseModel<ProductModel> | undefined;
     createProductResponse: ProductModel | undefined;
     updateProductResponse: ProductModel | undefined;
     deleteProductResponse: any | undefined;
@@ -56,7 +56,7 @@ export const ProductReducer = createReducer(
     })),
     on(ProductActions.loadProductSuccess, (state: ProductState, { response }) => ({
         ...state,
-        Product: response.items[0]
+        Product: response
     })),
     on(ProductActions.loadProductFail, (state: ProductState) => ({
         ...state,

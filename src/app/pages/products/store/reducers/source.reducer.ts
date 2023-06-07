@@ -7,7 +7,7 @@ export const SourceFetureKey = 'Source';
 
 export interface SourceState {
     SourcesResponse: ResponseModel<SourceModel> | undefined;
-    Source: SourceModel | undefined;
+    Source: ResponseModel<SourceModel> | undefined;
     createSourceResponse: SourceModel | undefined;
     updateSourceResponse: SourceModel | undefined;
     deleteSourceResponse: any | undefined;
@@ -56,7 +56,7 @@ export const SourceReducer = createReducer(
     })),
     on(SourceActions.loadSourceSuccess, (state: SourceState, { response }) => ({
         ...state,
-        Source: response.items[0]
+        Source: response
     })),
     on(SourceActions.loadSourceFail, (state: SourceState) => ({
         ...state,

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StocksComponent } from './components/stocks.component';
-import { ListComponent } from './components/list/list.component';
-import { CreateComponent } from './components/create/create.component';
+import { ListStockComponent } from './components/list/list.component';
+import { CreateStockComponent } from './components/create/create.component';
 
 const routes: Routes = [
     {
@@ -10,16 +10,16 @@ const routes: Routes = [
         component: StocksComponent,
         children: [
           {
-              path: 'list',
-              component: ListComponent,
+              path: 'listStock',
+              component: ListStockComponent,
           },
           {
-              path: 'update/:id',
-              component: CreateComponent
+              path: 'updateStock/:id',
+              component: CreateStockComponent
           },
           {
-            path: 'create',
-            component: CreateComponent
+            path: 'createStock',
+            component: CreateStockComponent
           },
         ],
     },

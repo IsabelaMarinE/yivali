@@ -1,26 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { Store } from '@ngrx/store';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import Swal from 'sweetalert2';
 import * as ClientActions from '../../store/actions/clients.action';
 import * as ClientsSelector from '../../store/selectors/client.selectors';
 import { ClientModel } from '../../models/client.model';
 import { ClientsStoreState } from '../../store/reducers/clients-store.reducer';
+import { ModalModel } from 'src/app/components/models/modal.model';
+import { ModalService } from 'src/app/components/modal/modal.service';
 
 @Component({
   selector: 'list-clients',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListClientComponent implements OnInit {
+export class ListClientComponent implements OnInit, OnDestroy {
+  @ViewChild('ViewClientTemplate')
+  ViewClientTemplate!: TemplateRef<any>;
+
   public ngDestroyed$ = new Subject();
   public clients!: Array<ClientModel>;
+  public client!: ClientModel;
+  public modalTemplate!: ViewContainerRef;
+
 
   constructor(
     private clientStore: Store<ClientsStoreState>,
-    private router: Router
+    private router: Router,
+    private modalService: ModalService
   ) {}
 
   public ngOnDestroy() {
@@ -48,7 +57,7 @@ export class ListClientComponent implements OnInit {
       .select(ClientsSelector.selectDeleteClientResponse)
       .pipe(takeUntil(this.ngDestroyed$))
       .subscribe((response) => {
-        if(response && response.state){
+        if(response){
           Swal.fire({
             icon: 'success',
             title: 'Cliente Eliminado',
@@ -76,5 +85,13 @@ export class ListClientComponent implements OnInit {
         }
       })
     }
+  }
+
+  public viewClient(data:ClientModel){
+    this.client = data;
+    this.modalService.openModal({
+      title: 'Datos de Cliente',
+      mainContent: this.ViewClientTemplate
+    });
   }
 }

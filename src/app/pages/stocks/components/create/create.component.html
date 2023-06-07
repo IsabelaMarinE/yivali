@@ -1,4 +1,4 @@
-<form class="row g-3 needs-validation" #FormNewStock="ngForm" (ngSubmit)="createNewStock(FormNewStock)" novalidate>
+<form class="row g-3 needs-validation" #FormNewStock="ngForm" (ngSubmit)="onSubmite(FormNewStock)" novalidate>
   <div class="col-md-12">
     <label for="name" class="form-label">Nombre Producto</label>
     <input type="text" class="form-control" id="name" [(ngModel)]="stock.name" #name="ngModel" name="name" required>
@@ -17,9 +17,14 @@
   </div>
   <div class="col-md-6">
     <label for="invoiceImg" class="form-label">Imagen Factura</label>
-    <input type="file" class="form-control" id="invoiceImg" [(ngModel)]="stock.invoiceImg" #invoiceImg="ngModel" name="invoiceImg">
+    <input type="file" #Image accept="image/*" (change)="LoadImgPerfil($event)" id="invoiceImg" [(ngModel)]="stock.invoiceImg" #invoiceImg="ngModel" name="invoiceImg" >
   </div>
-  <div class="col-12">
+  <div class="col-12" *ngIf="this.itemRequest.id === undefined; else actualizarButtonStock">
     <button class="btn btn-primary" type="submit">Agregar</button>
   </div>
+  <ng-template #actualizarButtonStock>
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit">Actualizar</button>
+    </div>
+  </ng-template>
 </form>

@@ -7,7 +7,7 @@ export const StockFetureKey = 'Stock';
 
 export interface StockState {
     StocksResponse: ResponseModel<StockModel> | undefined;
-    Stock: StockModel | undefined;
+    Stock: ResponseModel<StockModel> | undefined;
     createStockResponse: StockModel | undefined;
     updateStockResponse: StockModel | undefined;
     deleteStockResponse: any | undefined;
@@ -56,7 +56,7 @@ export const StockReducer = createReducer(
     })),
     on(StockActions.loadStockSuccess, (state: StockState, { response }) => ({
         ...state,
-        Stock: response.items[0]
+        Stock: response
     })),
     on(StockActions.loadStockFail, (state: StockState) => ({
         ...state,

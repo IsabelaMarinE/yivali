@@ -39,6 +39,6 @@ export class ClientService {
     }
 
     deleteClient(request: any): Observable<any> {
-      return this.http.get<any>(`${this.url}eliminarCliente/${Number(request.id)}`, httpOptions)
+      return this.http.get<any>(`${this.url}eliminarCliente/${Number(request)}`, httpOptions)
     }
 }

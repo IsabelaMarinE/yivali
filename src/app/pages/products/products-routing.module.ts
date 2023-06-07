@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductsComponent } from './components/products/products.component';
-import { ListComponent } from './components/products/list/list.component';
-import { CreateComponent } from './components/products/create/create.component';
+import { ListProductComponent } from './components/products/list/list.component';
+import { CreateProductComponent } from './components/products/create/create.component';
 
 const routes: Routes = [
     {
@@ -10,17 +10,17 @@ const routes: Routes = [
         component: ProductsComponent,
         children: [
             {
-                path: 'list',
-                component: ListComponent,
+                path: 'listProduct',
+                component: ListProductComponent,
             },
             {
-                path: 'create/:id',
-                component: CreateComponent
+              path: 'createProduct',
+              component: CreateProductComponent
             },
             {
-              path: 'create',
-              component: CreateComponent
-          },
+              path: 'updateProduct/:id',
+              component: CreateProductComponent
+            },
         ],
     },
 ];

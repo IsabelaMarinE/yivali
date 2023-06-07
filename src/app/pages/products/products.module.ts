@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListComponent } from './components/products/list/list.component';
-import { CreateComponent } from './components/products/create/create.component';
+import { ListProductComponent } from './components/products/list/list.component';
+import { CreateProductComponent } from './components/products/create/create.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductsRoutingModule } from './products-routing.module';
 import { StoreModule } from '@ngrx/store';
@@ -16,8 +16,8 @@ import { ListSourceComponent } from './components/sources/list/list.component';
 
 @NgModule({
   declarations: [
-    ListComponent,
-    CreateComponent,
+    ListProductComponent,
+    CreateProductComponent,
     ProductsComponent,
     SourceComponent,
     ListSourceComponent

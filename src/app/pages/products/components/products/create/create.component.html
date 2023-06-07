@@ -1,1 +1,37 @@
-<p>create works!</p>
+<form class="row" [formGroup]="formProduct" (ngSubmit)="onSubmite()">
+  <div class="col-md-6">
+    <label for="name" class="form-label">Nombre</label>
+    <input type="text" class="form-control" id="name" name="name" formControlName="name" required>
+  </div>
+  <div class="col-md-6">
+    <label for="img" class="form-label">Foto Producto</label>
+    <input type="file" #Image accept="image/*" (change)="LoadImgPerfil($event)" id="img" formControlName="img" name="img" >
+  </div>
+  <div class="col-md-12">
+    <button class="btn btn-primary" type="button" (click)="addSource()">Agregar Materia Prima</button>
+  </div>
+  <div formArrayName="sourceList">
+    <div class="row" *ngFor="let source of sourceList.controls; let i = index" [formGroupName]="i">
+      <div class="col-md-6">
+        <label for="name" class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="name" formControlName="name" required>
+      </div>
+      <div class="col-md-4">
+        <label for="quantity" class="form-label">Cantidad</label>
+        <input type="number" class="form-control" name="quantity" formControlName="quantity" required>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-danger" (click)="deleteSource(i)">X</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12" *ngIf="this.itemRequest.id === undefined; else actualizarButtonStock">
+    <button class="btn btn-primary" type="submit">Agregar</button>
+  </div>
+  <ng-template #actualizarButtonStock>
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit">Actualizar</button>
+    </div>
+  </ng-template>
+</form>
